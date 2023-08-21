@@ -84,4 +84,40 @@ public class BaseTest {
     public void closeBrowser () {
         driver.quit();
     }
+
+    public void searchSong() throws InterruptedException {
+        WebElement search = driver.findElement(By.cssSelector("[type='search']"));
+        search.clear();
+        search.sendKeys("Episode 2");
+        Thread.sleep(2000);
+    }
+
+    public void viewAllSongs() throws  InterruptedException{
+        WebElement viewAll = driver.findElement(By.cssSelector("[data-test='view-all-songs-btn']"));
+        viewAll.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickFirstSong()throws  InterruptedException {
+        WebElement firstSong = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr > td.title"));
+        firstSong.click();
+        Thread.sleep(2000);
+    }
+
+    public void choosePlaylist() throws  InterruptedException {
+        WebElement newPlaylist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'AAA')]"));
+        newPlaylist.click();
+        Thread.sleep(2000);
+    }
+
+    public void addToPlaylist() throws  InterruptedException {
+        WebElement addTo = driver.findElement(By.cssSelector("[data-test='add-to-btn']"));
+        addTo.click();
+        Thread.sleep(2000);
+    }
+
+    public String getAddtoPlaylistSuccessMsg() throws InterruptedException {
+        WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
+        return notification.getText();
+    }
 }
