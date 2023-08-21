@@ -63,7 +63,7 @@ public class Homework17 extends BaseTest {
     }
 
     public String getAddtoPlaylistSuccessMsg() throws InterruptedException {
-        WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right]"));
+        WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
         return notification.getText();
     }
 
