@@ -60,13 +60,13 @@ public class BaseTest {
     public void playNextSong() throws InterruptedException{
         WebElement nextSong = driver.findElement(By.cssSelector("[title='Play next song']"));
         nextSong.click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 
     public void clickPlayButton() throws InterruptedException {
         WebElement playBtn = driver.findElement(By.cssSelector("[title='Play or resume']"));
         playBtn.click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @AfterMethod
