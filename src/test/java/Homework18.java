@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import org.apache.hc.core5.util.Asserts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,7 @@ public class Homework18 extends BaseTest {
         clickPlayButton();
         Thread.sleep(2000);
         WebElement soundBar = driver.findElement(By.cssSelector("[alt='Sound bars']"));
-//        Assert.assertEquals(soundBar.isDisplayed());
+        Assert.assertTrue(soundBar.isDisplayed());
 
 
     }
@@ -36,3 +37,4 @@ public class Homework18 extends BaseTest {
 //        10. Click «Play next song» (media player controls), then the Play button to play a song.
 //
 //        11. Validate that a song is playing by verifying if the sound bar, or the pause button is displayed.
+
