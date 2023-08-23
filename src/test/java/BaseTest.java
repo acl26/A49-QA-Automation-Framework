@@ -1,6 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -23,7 +24,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeSuite
+    @BeforeMethod
     public void launchBrowser() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -52,15 +53,16 @@ public class BaseTest {
         passwordInput.sendKeys("te$t$tudent");
     }
 
-    public void clickSubmit() {
+    public void clickSubmit() throws InterruptedException{
         WebElement loginBtn = driver.findElement(By.cssSelector("[type='submit']"));
         loginBtn.click();
+        Thread.sleep(2000);
     }
 
     public void playNextSong() throws InterruptedException{
         WebElement nextSong = driver.findElement(By.cssSelector("[title='Play next song']"));
         nextSong.click();
-        Thread.sleep(4000);
+        Thread.sleep(2000);
     }
 
     public void clickPlayButton() throws InterruptedException {

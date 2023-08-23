@@ -9,7 +9,6 @@ public class Homework18 extends BaseTest {
 
     @Test
     public void playSong() throws InterruptedException {
-        launchBrowser();
         navigateToPage();
         provideEmail();
         providePassword();
@@ -27,7 +26,5 @@ public class Homework18 extends BaseTest {
 
 }
 
-//        10. Click «Play next song» (media player controls), then the Play button to play a song.
-//
-//        11. Validate that a song is playing by verifying if the sound bar, or the pause button is displayed.
+
 
