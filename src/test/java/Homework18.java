@@ -22,7 +22,6 @@ public class Homework18 extends BaseTest {
         WebElement soundBar = driver.findElement(By.cssSelector("[alt='Sound bars']"));
         Assert.assertTrue(soundBar.isDisplayed());
 
-
     }
 
 
