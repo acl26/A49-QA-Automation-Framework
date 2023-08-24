@@ -20,10 +20,7 @@ public class Homework18 extends BaseTest {
         Thread.sleep(2000);
         WebElement soundBar = driver.findElement(By.cssSelector("[alt='Sound bars']"));
         Assert.assertTrue(soundBar.isDisplayed());
-
     }
-
-
 }
 
 
