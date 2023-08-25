@@ -70,6 +70,11 @@ public class BaseTest {
      WebElement okay = driver.findElement(By.cssSelector(".ok"));
      okay.click();
     }
+
+    public String getDeletePlaylistMessage() {
+            WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
+            return notification.getText();
+        }
 }
 
 

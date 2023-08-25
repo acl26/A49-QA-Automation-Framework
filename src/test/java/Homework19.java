@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
@@ -18,12 +16,13 @@ public class Homework19 extends BaseTest {
         clickRedBtn();
         clickOk();
         Thread.sleep(2000);
-     WebElement getDeletePlaylistMessage = driver.findElement(By.cssSelector(".success.show"));
-     Assert.assertEquals(getDeletePlaylistMessage, notification);
+     Assert.assertEquals(getDeletePlaylistMessage(), notification);
 
     }
 
 }
+
+
 
 //        1. Create a new branch named homework-19.
 //
