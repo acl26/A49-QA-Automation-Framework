@@ -62,8 +62,13 @@ public class BaseTest {
     }
 
     protected void clickRedBtn() {
-     WebElement redBtn = driver.findElement(By.cssSelector("title='Delete this playlist'"));
-     clickRedBtn();
+     WebElement redBtn = driver.findElement(By.cssSelector(".del.btn-delete-playlist"));
+     redBtn.click();
+    }
+
+    protected void clickOk() {
+     WebElement okay = driver.findElement(By.cssSelector(".ok"));
+     okay.click();
     }
 }
 

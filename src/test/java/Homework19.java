@@ -4,10 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
- String notification = "\"Deleted playlist TestPRo\"";
+ String notification = "Deleted playlist \"Test Pro.\"";
  @Test
  public void deletePlaylist() throws  InterruptedException {
-     WebElement getDeletePlaylistMessage = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
 
         navigateToPage();
         provideEmail();
@@ -17,10 +16,13 @@ public class Homework19 extends BaseTest {
         clickPlaylist();
         Thread.sleep(2000);
         clickRedBtn();
+        clickOk();
         Thread.sleep(2000);
-        Assert.assertEquals(getDeletePlaylistMessage, notification);
+     WebElement getDeletePlaylistMessage = driver.findElement(By.cssSelector(".success.show"));
+     Assert.assertEquals(getDeletePlaylistMessage, notification);
 
     }
+
 }
 
 //        1. Create a new branch named homework-19.
