@@ -10,12 +10,9 @@ public class Homework19 extends BaseTest {
         provideEmail();
         providePassword();
         clickSubmit();
-        Thread.sleep(2000);
         clickPlaylist();
-        Thread.sleep(2000);
         clickRedBtn();
         clickOk();
-        Thread.sleep(2000);
      Assert.assertEquals(getDeletePlaylistMessage(), notification);
 
     }
