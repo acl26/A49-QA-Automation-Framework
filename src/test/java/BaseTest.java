@@ -1,5 +1,8 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -9,13 +12,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import java.time.Duration;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class BaseTest {
 
     public WebDriver driver = null;
    public String url;
-//    public String url = "https://qa.koel.app";
+   public static Actions actions = null;
+   WebDriverWait wait;
+
 
     @BeforeSuite
     static void setupClass() { WebDriverManager.chromedriver().setup(); }
@@ -26,10 +32,12 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
         url=baseURL;
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+        actions = new Actions(driver);
 
     }
 
@@ -57,8 +65,7 @@ public class BaseTest {
 }
 
     protected void clickPlaylist() {
-     WebElement selectedPlaylist = driver.findElement(By.cssSelector("#playlists> ul> li:nth-child(4)"));
-     selectedPlaylist.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists> ul> li:nth-child(4)"))).click();
     }
 
     protected void clickRedBtn() {
@@ -75,6 +82,33 @@ public class BaseTest {
             WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
             return notification.getText();
         }
+        public void loginCorrectMethod(){
+            navigateToPage();
+            provideEmail();
+            providePassword();
+            clickSubmit();
+        }
+
+    protected void rightCLickPlaylist() {
+        WebElement rightClick = driver.findElement(By.cssSelector("#playlists> ul> li:nth-child(4)"));
+        actions.contextClick(rightClick).perform();
+    }
+    protected void clickEdit() {
+        WebElement editBtn = driver.findElement(By.cssSelector(".menu.playlist-item-menu ul > li:nth-child(1)"));
+        editBtn.click();
+    }
+
+    public void enterNewName() {
+
+        WebElement newPlaylistName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='name']")));
+        newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        newPlaylistName.sendKeys("Rename Playlist");
+        newPlaylistName.click();
+    }
+    @AfterMethod
+    public void quitBrowser() {
+        driver.quit();
+    }
 }
 
 
