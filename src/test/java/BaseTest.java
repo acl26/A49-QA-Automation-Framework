@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -98,9 +99,9 @@ public class BaseTest {
     }
 
     public void enterNewName() {
-//        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists > ul > li.playlist.playlist.editing > input[type=text]")));
-        WebElement newPlaylistName = driver.findElement(By.cssSelector("#playlists > ul > li.playlist.playlist.editing > a"));
-        newPlaylistName.clear();
+
+        WebElement newPlaylistName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='name']")));
+        newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
         newPlaylistName.sendKeys("Rename Playlist");
         newPlaylistName.click();
     }
