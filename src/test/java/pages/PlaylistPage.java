@@ -27,12 +27,11 @@ public class PlaylistPage extends BasePage{
 
         WebElement newPlaylistName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='name']")));
         newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
-        newPlaylistName.sendKeys("Rename Playlist");
+        newPlaylistName.sendKeys("Test Pro");
         newPlaylistName.sendKeys(Keys.chord(Keys.ENTER));
     }
     public String getDeletePlaylistMessage() {
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alertify-logs.top.right")));
-//                driver.findElement(By.cssSelector(".alertify-logs.top.right"));
         return notification.getText();
     }
 
@@ -49,13 +48,23 @@ public class PlaylistPage extends BasePage{
 
     public void clickRedBtn() {
         WebElement redBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".del.btn-delete-playlist")));
-//        WebElement redBtn = driver.findElement(By.cssSelector(".del.btn-delete-playlist"));
         redBtn.click();
     }
 
     public void clickOk() {
         WebElement okay = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ok")));
-//        driver.findElement(By.cssSelector(".ok"));
         okay.click();
+    }
+
+    public void clickPlusButton() {
+        WebElement plus = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fa.fa-plus-circle.create")));
+        plus.click();
+
+
+    }
+    public void clickNewPlaylist() {
+        WebElement newP = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > nav > ul > li:nth-child(1)")));
+        newP.click();
+
     }
 }
