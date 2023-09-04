@@ -27,8 +27,16 @@ public class PlaylistPage extends BasePage{
 
         WebElement newPlaylistName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='name']")));
         newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
-        newPlaylistName.sendKeys("Test Pro");
+        newPlaylistName.sendKeys("Rename");
         newPlaylistName.sendKeys(Keys.chord(Keys.ENTER));
+    }
+
+    public void enterNewPlaylist() {
+
+        WebElement newPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='name']")));
+        newPlaylist.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        newPlaylist.sendKeys("Test Pro");
+        newPlaylist.sendKeys(Keys.chord(Keys.ENTER));
     }
     public String getDeletePlaylistMessage() {
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alertify-logs.top.right")));

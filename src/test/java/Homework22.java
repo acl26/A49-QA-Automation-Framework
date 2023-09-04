@@ -4,7 +4,7 @@ import pages.LoginPage;
 
 public class Homework22 extends BaseTest{
 
-    String newName = "Updated playlist \"Test Pro.\"";
+    String newName = "Updated playlist \"Rename.\"";
     @Test
     public void renamePlaylist() {
         loginPage.loginCorrectMethod();
@@ -22,7 +22,7 @@ public class Homework22 extends BaseTest{
         loginPage.loginCorrectMethod();
         playlistPage.clickPlusButton();
         playlistPage.clickNewPlaylist();
-        playlistPage.enterNewName();
+        playlistPage.enterNewPlaylist();
         Assert.assertEquals(playlistPage.getRenameMessage(), namedPlaylist);
 
     }
