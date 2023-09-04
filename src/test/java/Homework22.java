@@ -4,6 +4,7 @@ import pages.LoginPage;
 
 public class Homework22 extends BaseTest{
 
+    String newName = "Updated playlist \"Rename Playlist.\"";
     @Test
     public void renamePlaylist() {
         loginPage.loginCorrectMethod();
@@ -11,12 +12,13 @@ public class Homework22 extends BaseTest{
         playlistPage.rightCLickPlaylist();
         playlistPage.clickEdit();
         playlistPage.enterNewName();
+        Assert.assertEquals(playlistPage.getRenameMessage(), newName);
 
     }
 
     String notification = "Deleted playlist \"Test Pro.\"";
     @Test
-    public void deletePlaylist() throws  InterruptedException {
+    public void deletePlaylist() {
 
         basePage.navigateToPage(url);
         loginPage.provideEmail();
@@ -24,7 +26,7 @@ public class Homework22 extends BaseTest{
         loginPage.clickSubmit();
         playlistPage.clickPlaylist();
         playlistPage.clickRedBtn();
-        playlistPage.clickOk();
+//        playlistPage.clickOk();
         Assert.assertEquals(playlistPage.getDeletePlaylistMessage(), notification);
 
     }

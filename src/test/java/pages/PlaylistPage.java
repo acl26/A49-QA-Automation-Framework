@@ -28,13 +28,21 @@ public class PlaylistPage extends BasePage{
         WebElement newPlaylistName = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name='name']")));
         newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
         newPlaylistName.sendKeys("Rename Playlist");
-        newPlaylistName.click();
+        newPlaylistName.sendKeys(Keys.chord(Keys.ENTER));
     }
     public String getDeletePlaylistMessage() {
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alertify-logs.top.right")));
 //                driver.findElement(By.cssSelector(".alertify-logs.top.right"));
         return notification.getText();
     }
+
+    public String getRenameMessage() {
+        WebElement topRight = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alertify-logs.top.right")));
+//                driver.findElement(By.cssSelector(".alertify-logs.top.right"));
+        return topRight.getText();
+    }
+
+
     public void clickPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists> ul> li:nth-child(4)"))).click();
     }
@@ -46,7 +54,8 @@ public class PlaylistPage extends BasePage{
     }
 
     public void clickOk() {
-        WebElement okay = driver.findElement(By.cssSelector(".ok"));
+        WebElement okay = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ok")));
+//        driver.findElement(By.cssSelector(".ok"));
         okay.click();
     }
 }
