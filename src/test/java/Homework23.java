@@ -11,10 +11,10 @@ public class Homework23 extends BaseTest{
     @Test
     public void renamePlaylist() {
         loginPage.loginCorrectMethod();
-        playlistPage.clickPlaylist();
-        playlistPage.rightCLickPlaylist();
-        playlistPage.clickEdit();
-        playlistPage.enterNewName("Rename");
+        playlistPage.clickPlaylist()
+            .rightCLickPlaylist()
+            .clickEdit()
+            .enterNewName("Rename");
         Assert.assertEquals(playlistPage.getRenameMessage(), newName);
 
     }
@@ -23,9 +23,9 @@ public class Homework23 extends BaseTest{
     @Test
     public void createPlaylist() {
         loginPage.loginCorrectMethod();
-        playlistPage.clickPlusButton();
-        playlistPage.clickNewPlaylist();
-        playlistPage.enterNewName("Test Pro");
+        playlistPage.clickPlusButton()
+                    .clickNewPlaylist()
+                    .enterNewName("Test Pro");
         Assert.assertEquals(playlistPage.getRenameMessage(), namedPlaylist);
 
     }
@@ -34,8 +34,8 @@ public class Homework23 extends BaseTest{
     public void deletePlaylist() {
         basePage.navigateToPage(url);
         loginPage.loginCorrectMethod();
-        playlistPage.clickPlaylist();
-        playlistPage.clickRedBtn();
+        playlistPage.clickPlaylist()
+                    .clickRedBtn();
 //        playlistPage.clickOk();
         Assert.assertEquals(playlistPage.getDeletePlaylistMessage(), notification);
 

@@ -32,20 +32,23 @@ public class PlaylistPage extends BasePage{
         super(driver, wait, actions);
     }
 
-    public void rightCLickPlaylist() {
+    public PlaylistPage rightCLickPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(playlistRightClick));
         actions.contextClick(playlistRightClick).perform();
+        return this;
     }
-    public void clickEdit() {
+    public PlaylistPage clickEdit() {
         wait.until(ExpectedConditions.elementToBeClickable(editBtn));
         editBtn.click();
+        return this;
     }
 
-    public void enterNewName(String name) {
+    public PlaylistPage enterNewName(String name) {
         wait.until(ExpectedConditions.elementToBeClickable(newPlaylistName));
         newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
         newPlaylistName.sendKeys(name);
         newPlaylistName.sendKeys(Keys.chord(Keys.ENTER));
+        return this;
     }
 
     public String getDeletePlaylistMessage() {
@@ -58,14 +61,15 @@ public class PlaylistPage extends BasePage{
         return notification.getText();
     }
 
-
-    public void clickPlaylist() {
+    public PlaylistPage clickPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(playlistClick)).click();
+        return this;
     }
 
-    public void clickRedBtn() {
+    public PlaylistPage clickRedBtn() {
         wait.until(ExpectedConditions.elementToBeClickable(deletePlaylistBtn));
         deletePlaylistBtn.click();
+        return this;
     }
 
 //    public void clickOk() {
@@ -73,11 +77,13 @@ public class PlaylistPage extends BasePage{
 //        okay.click();
 //    }
 
-    public void clickPlusButton() {
+    public PlaylistPage clickPlusButton() {
         wait.until(ExpectedConditions.elementToBeClickable(plusBtn));
         plusBtn.click();
+        return this;
     }
-    public void clickNewPlaylist() {
+    public PlaylistPage clickNewPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(newPlaylist)).click();
+        return this;
     }
 }
