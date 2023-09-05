@@ -4,42 +4,48 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
-
-
-    public void loginCorrectMethod(){
-        navigateToPage(driver.getCurrentUrl());
-        provideEmail();
-        providePassword();
-        clickSubmit();
-    }
-
 
     public LoginPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         super(driver, wait, actions);
     }
 
+    @FindBy (css ="[type='email']")
+    WebElement emailField;
+    @FindBy (css ="[type='password']")
+    WebElement passwordField;
+    @FindBy (css = "[type='submit']")
+    WebElement submitBtn;
 
 
-    public void provideEmail() {
-        WebElement loginInput = driver.findElement(By.cssSelector("[type='email']"));
-        loginInput.click();
-        loginInput.clear();
-        loginInput.sendKeys("anna.gertzen@testpro.io");
+    public void loginCorrectMethod(){
+        navigateToPage(driver.getCurrentUrl());
+        provideEmail("anna.gertzen@testpro.io");
+        providePassword("te$t$tudent");
+        clickSubmit();
     }
 
-    public void providePassword() {
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
-        passwordInput.click();
-        passwordInput.clear();
-        passwordInput.sendKeys("te$t$tudent");
+    public void provideEmail(String email) {
+        wait.until(ExpectedConditions.elementToBeClickable(emailField));
+        emailField.click();
+        emailField.clear();
+        emailField.sendKeys(email);
+    }
+
+    public void providePassword(String password) {
+        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
+        passwordField.click();
+        passwordField.clear();
+        passwordField.sendKeys(password);
     }
 
     public void clickSubmit() {
-        WebElement loginBtn = driver.findElement(By.cssSelector("[type='submit']"));
-        loginBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(submitBtn));
+        submitBtn.click();
     }
 }
 

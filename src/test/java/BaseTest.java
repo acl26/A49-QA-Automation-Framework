@@ -14,6 +14,7 @@ import org.testng.annotations.AfterMethod;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
+import pages.HomePage;
 import pages.LoginPage;
 import pages.PlaylistPage;
 
@@ -27,6 +28,7 @@ public class BaseTest {
     BasePage basePage;
     PlaylistPage playlistPage;
     LoginPage loginPage;
+    HomePage homePage;
 
 
     public String url = "https://qa.koel.app/";
@@ -50,21 +52,12 @@ public class BaseTest {
         basePage = new BasePage(driver, wait, actions);
         playlistPage = new PlaylistPage (driver, wait, actions);
         loginPage = new LoginPage(driver, wait, actions);
+        homePage = new HomePage(driver, wait, actions);
         basePage.navigateToPage(url);
     }
 
     @AfterMethod
     public void quitBrowser() { driver.quit(); }
-
-
-
-
-
-
-
-
-
-
 
 }
 

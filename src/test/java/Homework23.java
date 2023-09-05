@@ -1,9 +1,12 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
 
-public class Homework22 extends BaseTest{
-
+public class Homework23 extends BaseTest{
+    @Test
+            public void login() {
+        loginPage.loginCorrectMethod();
+        Assert.assertTrue(homePage.avatarDisplayed());
+    }
     String newName = "Updated playlist \"Rename.\"";
     @Test
     public void renamePlaylist() {
@@ -11,7 +14,7 @@ public class Homework22 extends BaseTest{
         playlistPage.clickPlaylist();
         playlistPage.rightCLickPlaylist();
         playlistPage.clickEdit();
-        playlistPage.enterNewName();
+        playlistPage.enterNewName("Rename");
         Assert.assertEquals(playlistPage.getRenameMessage(), newName);
 
     }
@@ -22,18 +25,15 @@ public class Homework22 extends BaseTest{
         loginPage.loginCorrectMethod();
         playlistPage.clickPlusButton();
         playlistPage.clickNewPlaylist();
-        playlistPage.enterNewPlaylist();
+        playlistPage.enterNewName("Test Pro");
         Assert.assertEquals(playlistPage.getRenameMessage(), namedPlaylist);
 
     }
     String notification = "Deleted playlist \"Test Pro.\"";
     @Test
     public void deletePlaylist() {
-
         basePage.navigateToPage(url);
-        loginPage.provideEmail();
-        loginPage.providePassword();
-        loginPage.clickSubmit();
+        loginPage.loginCorrectMethod();
         playlistPage.clickPlaylist();
         playlistPage.clickRedBtn();
 //        playlistPage.clickOk();
@@ -41,9 +41,22 @@ public class Homework22 extends BaseTest{
 
     }
 
-
-
 }
+
+
+//1. Create a new branch named homework-23.
+//
+//        2. Refactor your code, implement Page Factory by using the initElements() method of Page Factory class.
+//
+//        3. Use @FindBy annotation for declaring Web Elements.
+//
+//        4. Implement Fluent Interfaces (optional).
+//
+//        5. Commit your changes to the new branch homework-23.
+//
+//        6. Push your code to the remote repository.
+//
+//        7. Create a pull request.
 
 
 
