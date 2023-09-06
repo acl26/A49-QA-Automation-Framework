@@ -43,20 +43,11 @@ public class Homework23 extends BaseTest{
 
 }
 
+//
+//2.  Set up our Selenium Grid (Standalone option) locally. Chrome browser would be enough to get an idea.
+//
+//        3. Implement Browser Factory method like we did in the class, so you can run Chrome browser using your local Grid.
 
-//1. Create a new branch named homework-23.
-//
-//        2. Refactor your code, implement Page Factory by using the initElements() method of Page Factory class.
-//
-//        3. Use @FindBy annotation for declaring Web Elements.
-//
-//        4. Implement Fluent Interfaces (optional).
-//
-//        5. Commit your changes to the new branch homework-23.
-//
-//        6. Push your code to the remote repository.
-//
-//        7. Create a pull request.
 
 
 
