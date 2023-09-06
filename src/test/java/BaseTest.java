@@ -1,6 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeMethod;
@@ -35,18 +36,14 @@ public class BaseTest {
 
 
     @BeforeSuite
-    static void setupClass() { WebDriverManager.chromedriver().setup(); }
+    public void setupClass() {
+        setupEdge();
+    }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String baseURL) {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--start-maximized");
 
-        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver,Duration.ofSeconds(20));
         actions = new Actions(driver);
         basePage = new BasePage(driver, wait, actions);
@@ -58,7 +55,22 @@ public class BaseTest {
 
     @AfterMethod
     public void quitBrowser() { driver.quit(); }
+    WebDriver setupEdge () {
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        return driver;
+    }
+    WebDriver setupChrome(){
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
 
+        driver = new ChromeDriver(options);
+        return driver;
+
+    }
 }
 
 
