@@ -1,27 +1,45 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.PlaylistPage;
 
 public class Homework23 extends BaseTest{
+    HomePage homePage;
+    PlaylistPage playlistPage;
+    LoginPage loginPage;
+    String newName = "Updated playlist \"Rename.\"";
+    String namedPlaylist = "Created playlist \"Test Pro.\"";
+    String notification = "Deleted playlist \"Test Pro.\"";
     @Test
-            public void login() {
+       public void login() {
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
+
         loginPage.loginCorrectMethod();
         Assert.assertTrue(homePage.avatarDisplayed());
     }
-    String newName = "Updated playlist \"Rename.\"";
+
     @Test
     public void renamePlaylist() {
+        loginPage = new LoginPage(driver);
+        playlistPage = new PlaylistPage(driver);
+
         loginPage.loginCorrectMethod();
         playlistPage.clickPlaylist()
             .rightCLickPlaylist()
             .clickEdit()
-            .enterNewName("Rename");
+            .enterNewName("Rename1");
         Assert.assertEquals(playlistPage.getRenameMessage(), newName);
 
     }
 
-    String namedPlaylist = "Created playlist \"Test Pro.\"";
+
     @Test
     public void createPlaylist() {
+        loginPage = new LoginPage(driver);
+        playlistPage = new PlaylistPage(driver);
+
         loginPage.loginCorrectMethod();
         playlistPage.clickPlusButton()
                     .clickNewPlaylist()
@@ -29,10 +47,12 @@ public class Homework23 extends BaseTest{
         Assert.assertEquals(playlistPage.getRenameMessage(), namedPlaylist);
 
     }
-    String notification = "Deleted playlist \"Test Pro.\"";
+
     @Test
     public void deletePlaylist() {
-        basePage.navigateToPage(url);
+        loginPage = new LoginPage(driver);
+        playlistPage = new PlaylistPage(driver);
+
         loginPage.loginCorrectMethod();
         playlistPage.clickPlaylist()
                     .clickRedBtn();

@@ -8,12 +8,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
-    public HomePage (WebDriver driver, WebDriverWait wait, Actions actions) {
-        super(driver, wait, actions);
-    }
+
 
     @FindBy (css = ".view-profile .avatar")
    WebElement avatar;
+
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
+
     public boolean avatarDisplayed(){
         wait.until(ExpectedConditions.elementToBeClickable(avatar));
         return avatar.isEnabled();

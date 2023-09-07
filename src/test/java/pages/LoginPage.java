@@ -10,16 +10,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver, WebDriverWait wait, Actions actions) {
-        super(driver, wait, actions);
-    }
-
     @FindBy (css ="[type='email']")
     WebElement emailField;
     @FindBy (css ="[type='password']")
     WebElement passwordField;
     @FindBy (css = "[type='submit']")
     WebElement submitBtn;
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
 
     public void loginCorrectMethod(){

@@ -27,10 +27,10 @@ public class PlaylistPage extends BasePage{
     @FindBy (css ="#playlists> ul> li:nth-child(4)")
     WebElement playlistClick;
 
-
-    public PlaylistPage(WebDriver driver, WebDriverWait wait, Actions actions) {
-        super(driver, wait, actions);
+    public PlaylistPage(WebDriver driver) {
+        super(driver);
     }
+
 
     public PlaylistPage rightCLickPlaylist() {
         wait.until(ExpectedConditions.elementToBeClickable(playlistRightClick));

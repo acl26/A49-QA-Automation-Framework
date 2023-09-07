@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.function.Function;
 
 public class BasePage {
@@ -14,10 +15,10 @@ public class BasePage {
     protected WebDriverWait wait;
    protected Actions actions;
 
-    public BasePage(WebDriver driver, WebDriverWait wait, Actions actions){
+    public BasePage(WebDriver driver){
         this.driver = driver;
-        this.wait = wait;
-        this.actions = actions;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -26,7 +27,7 @@ public class BasePage {
     public void navigateToPage(String url) { driver.get(url);}
 
 
-    public void quitBrowser() {
+    public void closeBrowser() {
         driver.quit();
     }
 
