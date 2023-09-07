@@ -18,6 +18,7 @@ import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PlaylistPage;
+import org.openqa.selenium.edge.EdgeOptions;
 
 
 public class BaseTest {
@@ -57,6 +58,8 @@ public class BaseTest {
     public void quitBrowser() { driver.quit(); }
     WebDriver setupEdge () {
         WebDriverManager.edgedriver().setup();
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("--remote-allow-origins=*");
         driver = new EdgeDriver();
         return driver;
     }
