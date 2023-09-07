@@ -50,8 +50,8 @@ public class BaseTest {
 
     WebDriver setupBrowser(String browser) throws MalformedURLException{
         DesiredCapabilities caps = new DesiredCapabilities();
-
         String gridURL="http://192.168.1.152:4444";
+
         switch (browser){
             case "MicrosoftEdge":
                 return setupEdge();
