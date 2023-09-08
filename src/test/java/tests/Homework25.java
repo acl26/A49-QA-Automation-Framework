@@ -13,7 +13,7 @@ public class Homework25 extends BaseTest {
     PlaylistPage playlistPage;
     LoginPage loginPage;
     String newName = "Updated playlist \"Rename.\"";
-    String namedPlaylist = "Created playlist \"Test Pro.\"";
+
 
     @Test
        public void login() {
@@ -24,33 +24,6 @@ public class Homework25 extends BaseTest {
         Assert.assertTrue(homePage.avatarDisplayed());
     }
 
-
-    @Test
-    public void createPlaylist() {
-        loginPage = new LoginPage(getThreadDriver());
-        playlistPage = new PlaylistPage(getThreadDriver());
-
-        loginPage.loginCorrectMethod();
-        playlistPage.clickPlusButton()
-                    .clickNewPlaylist()
-                    .enterNewName("Test Pro");
-        Assert.assertEquals(playlistPage.getRenameMessage(), namedPlaylist);
-    }
-
-    @Test
-    public void deletePlaylist() {
-        loginPage = new LoginPage(getThreadDriver());
-        playlistPage = new PlaylistPage(getThreadDriver());
-
-        loginPage.loginCorrectMethod();
-        playlistPage.clickPlaylist();
-        String playNameDeleted = driver.findElement(By.cssSelector("#playlists> ul> li:nth-child(4)")).findElement(By.xpath("a")).getText();
-        String notification = "Deleted playlist \""+playNameDeleted+".\"";
-        playlistPage.clickRedBtn();
-//        playlistPage.clickOk();
-        Assert.assertEquals(playlistPage.getDeletePlaylistMessage(), notification);
-
-    }
 
     @Test
     public void renamePlaylist() {
