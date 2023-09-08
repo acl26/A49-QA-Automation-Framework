@@ -1,3 +1,5 @@
+package tests;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -6,14 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -30,19 +29,23 @@ public class BaseTest {
 
     public WebDriver driver;
     public String url = "https://qa.koel.app/";
+    private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+    public static WebDriver getThreadDriver() {return threadDriver.get();}
 
 
-    @BeforeMethod
-    @Parameters({"BaseURL"})
+    @BeforeClass
+//    @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
+        threadDriver.set(setupBrowser("browser"));
         driver=setupBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
     }
-    @AfterMethod
+    @AfterClass
     public void closeBrowser() {
-        driver.quit();
+        threadDriver.get().close();
+        threadDriver.remove();
     }
     public void navigateToPage() {
         driver.get(url);
