@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
@@ -10,7 +11,7 @@ public class Homework24 extends BaseTest{
     LoginPage loginPage;
     String newName = "Updated playlist \"Rename.\"";
     String namedPlaylist = "Created playlist \"Test Pro.\"";
-    String notification = "Deleted playlist \"Test Pro.\"";
+
     @Test
        public void login() {
         loginPage = new LoginPage(driver);
@@ -39,8 +40,10 @@ public class Homework24 extends BaseTest{
         playlistPage = new PlaylistPage(driver);
 
         loginPage.loginCorrectMethod();
-        playlistPage.clickPlaylist()
-                    .clickRedBtn();
+        playlistPage.clickPlaylist();
+        String playNameDeleted = driver.findElement(By.cssSelector("#playlists> ul> li:nth-child(4)")).findElement(By.xpath("a")).getText();
+        String notification = "Deleted playlist \""+playNameDeleted+".\"";
+        playlistPage.clickRedBtn();
 //        playlistPage.clickOk();
         Assert.assertEquals(playlistPage.getDeletePlaylistMessage(), notification);
 

@@ -16,7 +16,7 @@ public class PlaylistPage extends BasePage{
     WebElement deletePlaylistBtn;
     @FindBy (css = ".fa.fa-plus-circle.create")
     WebElement plusBtn;
-    @FindBy (css ="#playlists > nav > ul > li:nth-child(1)" )
+    @FindBy (xpath ="//*[text()='New Playlist']" )
     WebElement newPlaylist;
     @FindBy (css = "#playlists> ul> li:nth-child(4)")
     WebElement playlistRightClick;
