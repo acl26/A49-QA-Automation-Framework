@@ -1,5 +1,11 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -8,73 +14,80 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
+
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.PlaylistPage;
+import org.openqa.selenium.edge.EdgeOptions;
 
 
 public class BaseTest {
 
-    public WebDriver driver = null;
-   public String url;
-//    public String url = "https://qa.koel.app";
+    public WebDriver driver;
+    public String url = "https://qa.koel.app/";
 
-    @BeforeSuite
-    static void setupClass() { WebDriverManager.chromedriver().setup(); }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String baseURL) {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        url=baseURL;
-        driver = new ChromeDriver(options);
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
+        driver=setupBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
+        url = BaseURL;
+        navigateToPage();
     }
-
+    @AfterMethod
+    public void closeBrowser() {
+        driver.quit();
+    }
     public void navigateToPage() {
         driver.get(url);
     }
 
-    public void provideEmail() {
-        WebElement loginInput = driver.findElement(By.cssSelector("[type='email']"));
-        loginInput.click();
-        loginInput.clear();
-        loginInput.sendKeys("anna.gertzen@testpro.io");
-    }
+    WebDriver setupBrowser(String browser) throws MalformedURLException{
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL="http://192.168.1.152:4444";
 
-    public void providePassword() {
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
-        passwordInput.click();
-        passwordInput.clear();
-        passwordInput.sendKeys("te$t$tudent");
-    }
+        switch (browser){
+            case "MicrosoftEdge":
+                return setupEdge();
+            case "chrome":
+                return setupChrome();
+            case "grid-chrome":
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "grid-edge":
+                caps.setCapability("browserName", "edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            default:
+                return setupChrome();
 
-    public void clickSubmit() {
-        WebElement loginBtn = driver.findElement(By.cssSelector("[type='submit']"));
-        loginBtn.click();
-}
-
-    protected void clickPlaylist() {
-     WebElement selectedPlaylist = driver.findElement(By.cssSelector("#playlists> ul> li:nth-child(4)"));
-     selectedPlaylist.click();
-    }
-
-    protected void clickRedBtn() {
-     WebElement redBtn = driver.findElement(By.cssSelector(".del.btn-delete-playlist"));
-     redBtn.click();
-    }
-
-    protected void clickOk() {
-     WebElement okay = driver.findElement(By.cssSelector(".ok"));
-     okay.click();
-    }
-
-    public String getDeletePlaylistMessage() {
-            WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
-            return notification.getText();
         }
+    }
+
+
+    WebDriver setupEdge () {
+        WebDriverManager.edgedriver().setup();
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("--remote-allow-origins=*");
+        edgeOptions.addArguments("--start-maximized");
+        driver = new EdgeDriver();
+        return driver;
+    }
+    WebDriver setupChrome(){
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
+        return driver;
+
+    }
 }
 
 
