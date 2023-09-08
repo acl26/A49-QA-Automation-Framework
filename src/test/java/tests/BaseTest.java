@@ -24,20 +24,18 @@ import pages.LoginPage;
 import pages.PlaylistPage;
 import org.openqa.selenium.edge.EdgeOptions;
 
-
 public class BaseTest {
-
     public WebDriver driver;
     public String url = "https://qa.koel.app/";
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     public static WebDriver getThreadDriver() {return threadDriver.get();}
 
 
-    @BeforeClass
-//    @Parameters({"BaseURL"})
+    @BeforeMethod
+    @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         threadDriver.set(setupBrowser("browser"));
-        driver=setupBrowser(System.getProperty("browser"));
+//        driver=setupBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
