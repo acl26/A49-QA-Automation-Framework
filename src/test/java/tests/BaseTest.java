@@ -16,7 +16,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
 import pages.HomePage;
@@ -88,6 +91,20 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         return driver;
 
+    }
+    WebDriver setupLambda()throws MalformedURLException{
+        String hubURL= "https://lambdatest.com/wd/hub";
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("117.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "anna.gertzen");
+        ltOptions.put("accessKey", "MtfiFPF5L5bGCD6eBgEkbwidrQ81VVwh1D1bQk6746f40iiONu");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
     }
 }
 
