@@ -48,7 +48,7 @@ public class BaseTest {
         threadDriver.remove();
     }
     public void navigateToPage() {
-        driver.get(url);
+       getThreadDriver().get(url);
     }
 
     WebDriver setupBrowser(String browser) throws MalformedURLException{
@@ -70,7 +70,6 @@ public class BaseTest {
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
             default:
                 return setupChrome();
-
         }
     }
 
