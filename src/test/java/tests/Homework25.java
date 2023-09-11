@@ -24,19 +24,35 @@ public class Homework25 extends BaseTest {
         Assert.assertTrue(homePage.avatarDisplayed());
     }
 
+    @Test
+    public void loginInvalidEmail() {
+        LoginPage loginPage = new LoginPage(getThreadDriver());
+
+        loginPage.provideEmail("invalid@email.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmit();
+        Assert.assertEquals(getThreadDriver().getCurrentUrl(),url);
+}
+    @Test
+    public void loginEmptyPassword() {
+        LoginPage loginPage = new LoginPage(getThreadDriver());
+
+        loginPage.provideEmail("anna.gertzen@testpro.io");
+        loginPage.providePassword("");
+        loginPage.clickSubmit();
+        Assert.assertEquals(getThreadDriver().getCurrentUrl(), url);
+    }
 
     @Test
-    public void renamePlaylist() {
-        loginPage = new LoginPage(driver);
-        playlistPage = new PlaylistPage(driver);
+    public void loginEmptyEmail() {
+        LoginPage loginPage = new LoginPage(getThreadDriver());
 
-        loginPage.loginCorrectMethod();
-        playlistPage.clickPlaylist()
-                .rightCLickPlaylist()
-                .clickEdit()
-                .enterNewName("Rename");
-        Assert.assertEquals(playlistPage.getRenameMessage(), newName);
+        loginPage.provideEmail("");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmit();
+        Assert.assertEquals(getThreadDriver().getCurrentUrl(), url);
     }
+
 
 }
 

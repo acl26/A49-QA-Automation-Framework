@@ -38,12 +38,11 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         threadDriver.set(setupBrowser("browser"));
-//        driver=setupBrowser(System.getProperty("browser"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getThreadDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         url = BaseURL;
         navigateToPage();
     }
-    @AfterClass
+    @AfterMethod
     public void closeBrowser() {
         threadDriver.get().close();
         threadDriver.remove();

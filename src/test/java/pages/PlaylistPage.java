@@ -28,47 +28,44 @@ public class PlaylistPage extends BasePage{
     WebElement playlistClick;
 
     public PlaylistPage(WebDriver driver) {
+
         super(driver);
     }
 
 
     public PlaylistPage rightCLickPlaylist() {
-        wait.until(ExpectedConditions.elementToBeClickable(playlistRightClick));
-        actions.contextClick(playlistRightClick).perform();
+        contextClick(playlistRightClick);
         return this;
     }
     public PlaylistPage clickEdit() {
-        wait.until(ExpectedConditions.elementToBeClickable(editBtn));
-        editBtn.click();
+        click(editBtn);
         return this;
     }
 
     public PlaylistPage enterNewName(String name) {
-        wait.until(ExpectedConditions.elementToBeClickable(newPlaylistName));
-        newPlaylistName.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        findElement(newPlaylistName).sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
         newPlaylistName.sendKeys(name);
         newPlaylistName.sendKeys(Keys.chord(Keys.ENTER));
         return this;
     }
 
     public String getDeletePlaylistMessage() {
-        wait.until(ExpectedConditions.elementToBeClickable(notification));
+        findElement(notification);
         return notification.getText();
     }
 
     public String getRenameMessage() {
-        wait.until(ExpectedConditions.elementToBeClickable(notification));
+        findElement(notification);
         return notification.getText();
     }
 
     public PlaylistPage clickPlaylist() {
-        wait.until(ExpectedConditions.elementToBeClickable(playlistClick)).click();
+        click(playlistClick);
         return this;
     }
 
     public PlaylistPage clickRedBtn() {
-        wait.until(ExpectedConditions.elementToBeClickable(deletePlaylistBtn));
-        deletePlaylistBtn.click();
+        click(deletePlaylistBtn);
         return this;
     }
 
