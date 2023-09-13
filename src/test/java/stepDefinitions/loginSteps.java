@@ -1,5 +1,5 @@
 package stepDefinitions;
-
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -9,13 +9,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-package stepDefinitions;
+
 
 public class loginSteps {
     WebDriver driver;
     WebDriverWait wait;
     public loginSteps() {
         @Given("I open broswer")
+        @Before
         public void openBrowser(){
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
@@ -27,7 +28,7 @@ public class loginSteps {
         }
 
         @And("I open Login page")
-        public void openLogin() {
+        public void openLoginPage() {
             driver.get("https://qa.koel.app/");
         }
 
