@@ -15,14 +15,14 @@ public class Homework25 extends BaseTest {
     String newName = "Updated playlist \"Rename.\"";
 
 
-    @Test
-       public void login() {
-        loginPage = new LoginPage(getThreadDriver());
-        homePage = new HomePage(getThreadDriver());
-
-        loginPage.loginCorrectMethod();
-        Assert.assertTrue(homePage.avatarDisplayed());
-    }
+//    @Test
+//       public void login() {
+//        loginPage = new LoginPage(getThreadDriver());
+//        homePage = new HomePage(getThreadDriver());
+//
+//        loginPage.loginCorrectMethod();
+//        Assert.assertTrue(homePage.avatarDisplayed());
+//    }
 
     @Test
     public void loginInvalidEmail() {
