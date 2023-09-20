@@ -23,29 +23,24 @@ public class LoginPage extends BasePage {
 
 
     public void loginCorrectMethod(){
-        navigateToPage(driver.getCurrentUrl());
+//        navigateToPage(driver.getCurrentUrl());
         provideEmail("anna.gertzen@testpro.io");
         providePassword("te$t$tudent");
         clickSubmit();
     }
 
     public void provideEmail(String email) {
-        wait.until(ExpectedConditions.elementToBeClickable(emailField));
-        emailField.click();
-        emailField.clear();
+        findElement(emailField).clear();
         emailField.sendKeys(email);
     }
 
     public void providePassword(String password) {
-        wait.until(ExpectedConditions.elementToBeClickable(passwordField));
-        passwordField.click();
-        passwordField.clear();
+        findElement(passwordField).clear();
         passwordField.sendKeys(password);
     }
 
     public void clickSubmit() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitBtn));
-        submitBtn.click();
+        click(submitBtn);
     }
 }
 
