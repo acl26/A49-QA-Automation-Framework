@@ -1,3 +1,5 @@
+package tests;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -5,7 +7,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.PlaylistPage;
 
-public class Homework24 extends BaseTest{
+public class PlaylistsTest extends BaseTest{
     HomePage homePage;
     PlaylistPage playlistPage;
     LoginPage loginPage;

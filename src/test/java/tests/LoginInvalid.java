@@ -1,14 +1,12 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PlaylistPage;
-import tests.BaseTest;
 
-public class Homework25 extends BaseTest {
+public class LoginInvalid extends BaseTest {
     HomePage homePage;
     PlaylistPage playlistPage;
     LoginPage loginPage;
