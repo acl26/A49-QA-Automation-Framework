@@ -1,5 +1,8 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -9,13 +12,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import java.time.Duration;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.PlaylistPage;
 
 
 public class BaseTest {
 
     public WebDriver driver = null;
-   public String url;
-//    public String url = "https://qa.koel.app";
+//    public String url;
+    public static Actions actions = null;
+    WebDriverWait wait;
+    BasePage basePage;
+    PlaylistPage playlistPage;
+    LoginPage loginPage;
+    HomePage homePage;
+
+
+    public String url = "https://qa.koel.app/";
+
 
     @BeforeSuite
     static void setupClass() { WebDriverManager.chromedriver().setup(); }
@@ -26,55 +43,22 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        url=baseURL;
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
+
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
+        wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+        actions = new Actions(driver);
+        basePage = new BasePage(driver, wait, actions);
+        playlistPage = new PlaylistPage (driver, wait, actions);
+        loginPage = new LoginPage(driver, wait, actions);
+        homePage = new HomePage(driver, wait, actions);
+        basePage.navigateToPage(url);
     }
 
-    public void navigateToPage() {
-        driver.get(url);
-    }
+    @AfterMethod
+    public void quitBrowser() { driver.quit(); }
 
-    public void provideEmail() {
-        WebElement loginInput = driver.findElement(By.cssSelector("[type='email']"));
-        loginInput.click();
-        loginInput.clear();
-        loginInput.sendKeys("anna.gertzen@testpro.io");
-    }
-
-    public void providePassword() {
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
-        passwordInput.click();
-        passwordInput.clear();
-        passwordInput.sendKeys("te$t$tudent");
-    }
-
-    public void clickSubmit() {
-        WebElement loginBtn = driver.findElement(By.cssSelector("[type='submit']"));
-        loginBtn.click();
-}
-
-    protected void clickPlaylist() {
-     WebElement selectedPlaylist = driver.findElement(By.cssSelector("#playlists> ul> li:nth-child(4)"));
-     selectedPlaylist.click();
-    }
-
-    protected void clickRedBtn() {
-     WebElement redBtn = driver.findElement(By.cssSelector(".del.btn-delete-playlist"));
-     redBtn.click();
-    }
-
-    protected void clickOk() {
-     WebElement okay = driver.findElement(By.cssSelector(".ok"));
-     okay.click();
-    }
-
-    public String getDeletePlaylistMessage() {
-            WebElement notification = driver.findElement(By.cssSelector(".alertify-logs.top.right"));
-            return notification.getText();
-        }
 }
 
 
